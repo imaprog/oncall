@@ -33,4 +33,16 @@ RSpec.describe Engineer, type: :model do
     engineer = Engineer.new(:name=> "Sally", :email=>"sally@mail.com")
     expect(engineer.save).to be false
   end
+
+  it "Blank On Call Works data ignored!" do
+    params = { engineer: {
+      name: 'LULU', email: 'lulu@gmail.com', on_call_works_attributes: [
+        { total_hours: '' }
+      ]
+    }}
+
+    engineer = Engineer.create(params[:engineer])
+    expect(engineer.on_call_works.blank?).to be true
+  end
+
 end
