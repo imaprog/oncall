@@ -1,0 +1,2 @@
+class OnCallWork < ApplicationRecord
+end
