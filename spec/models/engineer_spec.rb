@@ -27,4 +27,10 @@ RSpec.describe Engineer, type: :model do
     engineer.email = 'shafiq@gmailcom'
     expect(engineer.save).to be false
   end
+
+  it "Failed to create! Email must be unique!" do
+    Engineer.create!(:name=> "Sally", :email=>"sally@mail.com")
+    engineer = Engineer.new(:name=> "Sally", :email=>"sally@mail.com")
+    expect(engineer.save).to be false
+  end
 end
