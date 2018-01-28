@@ -7,7 +7,16 @@ class EngineersController < ApplicationController
   end
 
   def create
-    Engineer.create(engineer_params)
+    @engineer = Engineer.new(engineer_params)
+    if @engineer.save
+      if @engineer.on_call_works.blank?
+        @engineer.destroy!
+        redirect_to new_engineer
+      end
+      redirect_to @engineer
+    else
+      redirect_to new_engineer
+    end
   end
 
   def show
@@ -20,8 +29,10 @@ class EngineersController < ApplicationController
 
   def update
     @engineer = Engineer.find(params[:id])
-    if @engineer.update(engineer_params)
-
+    if @engineer.update_attributes(engineer_params)
+      redirect_to engineers
+    else
+      redirect_to edit_engineer(@engineer)
     end
   end
 
