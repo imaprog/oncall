@@ -12,11 +12,12 @@ class EngineersController < ApplicationController
     @engineers = Array.new
     engineers.each do |engineer|
       total_hours = engineer.overtimes.where("day between ? and ?", start_date, end_date).sum(:hours)
-
-      engineerHash = Hash.new
-      engineerHash["engineer"] = engineer
-      engineerHash["overtimes"] = total_hours
-      @engineers.push(engineerHash)
+      unless total_hours == 0
+        engineerHash = Hash.new
+        engineerHash["engineer"] = engineer
+        engineerHash["overtimes"] = total_hours
+        @engineers.push(engineerHash)
+      end
     end
   end
 
