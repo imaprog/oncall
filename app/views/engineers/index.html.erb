@@ -8,21 +8,11 @@
 	</tr>
 </thead>	
 <tbody align="center">
-	<tr>
-		<td>Ali</td>
-		<td>35</td>
-	</tr>
-	<tr>
-		<td>Fred</td>
-		<td>9</td>
-	</tr>
-	<tr>
-		<td>Muhammad</td>
-		<td>11</td>
-	</tr>
-	<tr>
-		<td>Bill</td>
-		<td>5</td>
-	</tr>
+	<% @engineers.each do |engineer| %>
+		<tr>
+			<td><%= engineer.name %></td>
+			<td><%= engineer.overtimes.count(:hours) %></td>
+		</tr>
+	<% end %>
 </tbody>
 </table>

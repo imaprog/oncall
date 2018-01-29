@@ -1,14 +1,6 @@
 class EngineersController < ApplicationController
   def index
-    @engineer = Engineer.all
-
-    if params.has_key?("month") && !params[:month].blank?
-      month      = Date.parse(params[:month])
-      start_date = month.beginning_of_month.strftime("%F")
-      end_date   = month.end_of_month.strftime("%F")
-
-      @engineer = @engineer.where("day between ? and ?", start_date, end_date)
-    end
+    @engineers = Engineer.all
   end
 
   def new
