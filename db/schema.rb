@@ -10,25 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128140324) do
+ActiveRecord::Schema.define(version: 20180129121053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "engineers", force: :cascade do |t|
     t.string "name"
-    t.string "card_number"
-    t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
   end
 
-  create_table "on_call_works", force: :cascade do |t|
-    t.float "total_hours"
+  create_table "overtimes", force: :cascade do |t|
+    t.integer "engineer_id"
+    t.date "day"
+    t.integer "hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "engineer_id"
   end
 
 end
