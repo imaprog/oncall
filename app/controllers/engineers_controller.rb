@@ -2,12 +2,12 @@ class EngineersController < ApplicationController
   def index
     engineers = Engineer.all
     if params.has_key?("month") && !params[:month].blank?
-      month      = Date.parse(params[:month])
+      @month      = Date.parse(params[:month])
     else
-      month      = Date.parse(Time.now.strftime("%m"))
+      @month      = Date.parse(Time.now.strftime("%m"))
     end
-    start_date = month.beginning_of_month.strftime("%F")
-    end_date   = month.end_of_month.strftime("%F")
+    start_date = @month.beginning_of_month.strftime("%F")
+    end_date   = @month.end_of_month.strftime("%F")
 
     @engineers = Array.new
     engineers.each do |engineer|
