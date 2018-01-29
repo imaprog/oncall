@@ -8,10 +8,10 @@
 	</tr>
 </thead>	
 <tbody align="center">
-	<% @engineers.each do |engineer| %>
+	<% @engineers.each do |ha| %>
 		<tr>
-			<td><%= engineer.name %></td>
-			<td><%= engineer.overtimes.count(:hours) %></td>
+			<td><%= ha["engineer"]["name"] %></td>
+			<td><%= ha["overtimes"] %></td>
 		</tr>
 	<% end %>
 </tbody>

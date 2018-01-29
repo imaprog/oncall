@@ -1,6 +1,23 @@
 class EngineersController < ApplicationController
   def index
-    @engineers = Engineer.all
+    engineers = Engineer.all
+    if params.has_key?("month") && !params[:month].blank?
+      month      = Date.parse(params[:month])
+    else
+      month      = Date.parse(Time.now.strftime("%m"))
+    end
+    start_date = month.beginning_of_month.strftime("%F")
+    end_date   = month.end_of_month.strftime("%F")
+
+    @engineers = Array.new
+    engineers.each do |engineer|
+      total_hours = engineer.overtimes.where("day between ? and ?", start_date, end_date).sum(:hours)
+
+      engineerHash = Hash.new
+      engineerHash["engineer"] = engineer
+      engineerHash["overtimes"] = total_hours
+      @engineers.push(engineerHash)
+    end
   end
 
   def new
